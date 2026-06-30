@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SearchX } from "lucide-react";
@@ -7,6 +8,38 @@ import { groups } from "@/db/schema";
 import { getCurrentMember } from "@/lib/auth";
 import { normalizeCode } from "@/lib/codes";
 import JoinForm from "@/components/JoinForm";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}): Promise<Metadata> {
+  const { code: rawCode } = await params;
+  const code = normalizeCode(decodeURIComponent(rawCode));
+
+  const [group] = await db
+    .select({ name: groups.name })
+    .from(groups)
+    .where(eq(groups.inviteCode, code))
+    .limit(1);
+
+  if (!group) {
+    return {
+      title: "Invitation introuvable, PickAct",
+      description: "Ce lien d'invitation semble invalide ou expiré.",
+    };
+  }
+
+  const title = `Rejoins ${group.name} sur PickAct`;
+  const description = `Tu es invité à rejoindre ${group.name} : ajoutez vos activités et laissez la roue en tirer une au hasard.`;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+    twitter: { title, description },
+  };
+}
 
 export default async function JoinPage({
   params,

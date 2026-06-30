@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,10 +13,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "PickAct, choisir une activité au hasard entre amis";
+const description =
+  "Ajoutez vos activités anonymement et laissez PickAct en tirer une au hasard selon votre temps, votre budget et votre mode de transport.";
+
 export const metadata: Metadata = {
-  title: "PickAct, choisir une activité au hasard entre amis",
-  description:
-    "Ajoutez vos activités anonymement et laissez PickAct en tirer une au hasard selon votre temps, votre budget et votre mode de transport.",
+  metadataBase: new URL(siteUrl()),
+  title,
+  description,
+  applicationName: "PickAct",
+  openGraph: {
+    type: "website",
+    siteName: "PickAct",
+    locale: "fr_FR",
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({

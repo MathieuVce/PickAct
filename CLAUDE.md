@@ -93,6 +93,9 @@ vercel env pull .env.local                            # récupère DATABASE_URL 
 ```
 Env requises : `DATABASE_URL` (Neon), `ADMIN_PASSWORD`, `ADMIN_SECRET`.
 
+## Git / commits
+- **Ne jamais ajouter de ligne `Co-Authored-By` (ni mention « coauthored ») dans les messages de commit.**
+
 ## Pièges
 - `db` est un Proxy paresseux : pas de connexion au build, seulement à la 1re requête (env manquante = throw runtime).
 - Server Actions de mutation : `redirect()` lève volontairement (ne pas l'envelopper dans try/catch).
