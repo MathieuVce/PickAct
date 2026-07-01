@@ -11,12 +11,7 @@ import {
 import { sql } from "drizzle-orm";
 
 /** Modes de transport, permet notamment de savoir si une voiture est nécessaire. */
-export const travelModeEnum = pgEnum("travel_mode", [
-  "walk",
-  "bike",
-  "car",
-  "transit",
-]);
+export const travelModeEnum = pgEnum("travel_mode", ["walk", "bike", "car", "transit"]);
 
 /** Statut d'une activité dans le cycle de tirage. */
 export const activityStatusEnum = pgEnum("activity_status", [
@@ -30,9 +25,7 @@ export const groups = pgTable("groups", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
   inviteCode: text("invite_code").notNull().unique(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const members = pgTable(
@@ -47,9 +40,7 @@ export const members = pgTable(
     passwordHash: text("password_hash").notNull(),
     /** Identifie le membre sur un navigateur (cookie httpOnly), régénéré à chaque connexion. */
     sessionToken: text("session_token").notNull().unique(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     // Un pseudo unique par groupe (insensible à la casse) pour une connexion déterministe.
@@ -79,9 +70,7 @@ export const activities = pgTable("activities", {
   notes: text("notes"),
   status: activityStatusEnum("status").notNull().default("active"),
   decidedAt: timestamp("decided_at", { withTimezone: true }),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export type Group = typeof groups.$inferSelect;

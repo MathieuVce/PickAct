@@ -41,7 +41,7 @@ export default function PasswordField({
         onClick={() => setShow((v) => !v)}
         aria-label={show ? "Masquer le mot de passe" : "Afficher le mot de passe"}
         aria-pressed={show}
-        className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-lg p-2 text-muted transition-colors hover:text-foreground"
+        className="text-muted hover:text-foreground absolute top-1/2 right-1.5 -translate-y-1/2 rounded-lg p-2 transition-colors"
       >
         {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
       </button>

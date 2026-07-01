@@ -67,18 +67,18 @@ export default async function JoinPage({
       <div className="card w-full max-w-md">
         {group ? (
           <>
-            <p className="text-sm text-muted">Tu es invité à rejoindre</p>
+            <p className="text-muted text-sm">Tu es invité à rejoindre</p>
             <h1 className="mb-1 text-2xl font-bold">{group.name}</h1>
-            <p className="mb-6 text-sm text-muted">
+            <p className="text-muted mb-6 text-sm">
               Choisis un pseudo et un mot de passe pour entrer dans le groupe.
             </p>
             <JoinForm code={group.inviteCode} />
           </>
         ) : (
           <div className="text-center">
-            <SearchX className="mx-auto size-12 text-muted" />
+            <SearchX className="text-muted mx-auto size-12" />
             <h1 className="mt-3 text-xl font-bold">Groupe introuvable</h1>
-            <p className="mt-2 text-sm text-muted">
+            <p className="text-muted mt-2 text-sm">
               Le lien d&apos;invitation semble invalide ou expiré.
             </p>
             <Link href="/" className="btn-primary mt-5 inline-flex">

@@ -47,10 +47,12 @@ export default async function AdminHomePage() {
       <AdminNav />
       <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
         <h1 className="mb-1 text-2xl font-bold">Tous les groupes</h1>
-        <p className="mb-6 text-sm text-muted">{rows.length} groupe(s) au total.</p>
+        <p className="text-muted mb-6 text-sm">{rows.length} groupe(s) au total.</p>
 
         {rows.length === 0 ? (
-          <div className="card py-12 text-center text-muted">Aucun groupe pour l&apos;instant.</div>
+          <div className="card text-muted py-12 text-center">
+            Aucun groupe pour l&apos;instant.
+          </div>
         ) : (
           <ul className="flex flex-col gap-3">
             {rows.map((g) => (
@@ -63,10 +65,16 @@ export default async function AdminHomePage() {
                     <h2 className="min-w-0 truncate font-semibold">{g.name}</h2>
                     <code className="chip shrink-0 font-mono">{g.inviteCode}</code>
                   </div>
-                  <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs text-muted">
-                    <span className="chip"><Users className="size-3.5" /> {g.members} membre(s)</span>
-                    <span className="chip"><ListChecks className="size-3.5" /> {g.activities} activité(s)</span>
-                    <span className="chip">{new Date(g.createdAt).toLocaleDateString("fr-FR")}</span>
+                  <div className="text-muted mt-1.5 flex flex-wrap gap-1.5 text-xs">
+                    <span className="chip">
+                      <Users className="size-3.5" /> {g.members} membre(s)
+                    </span>
+                    <span className="chip">
+                      <ListChecks className="size-3.5" /> {g.activities} activité(s)
+                    </span>
+                    <span className="chip">
+                      {new Date(g.createdAt).toLocaleDateString("fr-FR")}
+                    </span>
                   </div>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
@@ -78,7 +86,11 @@ export default async function AdminHomePage() {
                   </Link>
                   <form action={deleteGroup}>
                     <input type="hidden" name="id" value={g.id} />
-                    <button type="submit" className="btn-danger px-3 py-1.5" aria-label="Supprimer le groupe">
+                    <button
+                      type="submit"
+                      className="btn-danger px-3 py-1.5"
+                      aria-label="Supprimer le groupe"
+                    >
                       <Trash2 className="size-4" />
                     </button>
                   </form>

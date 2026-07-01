@@ -9,14 +9,7 @@ function prefersReducedMotion(): boolean {
   );
 }
 
-const COLORS = [
-  "#8b5cf6",
-  "#f472b6",
-  "#22d3ee",
-  "#fbbf24",
-  "#34d399",
-  "#fb7185",
-];
+const COLORS = ["#8b5cf6", "#f472b6", "#22d3ee", "#fbbf24", "#34d399", "#fb7185"];
 
 /** Eclat de confettis multicolore, désactivé si l'utilisateur préfère moins d'animations. */
 export function celebrate(): void {

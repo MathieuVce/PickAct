@@ -28,10 +28,7 @@ export default function JoinForm({ code }: { code: string }) {
         <label className="label" htmlFor="password">
           Mot de passe
         </label>
-        <PasswordField
-          id="password"
-          placeholder="Choisis ou saisis ton mot de passe"
-        />
+        <PasswordField id="password" placeholder="Choisis ou saisis ton mot de passe" />
       </div>
       {state?.error && (
         <p className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-300">

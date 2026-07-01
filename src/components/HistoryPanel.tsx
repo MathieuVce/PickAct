@@ -35,7 +35,7 @@ export default function HistoryPanel({
   return (
     <div className="card">
       <h2 className="mb-3 text-lg font-semibold">Historique</h2>
-      <div className="mb-4 flex rounded-xl border border-border bg-surface-2 p-1">
+      <div className="border-border bg-surface-2 mb-4 flex rounded-xl border p-1">
         {TABS.map(({ id, label, Icon }) => (
           <button
             key={id}
@@ -51,13 +51,13 @@ export default function HistoryPanel({
       </div>
 
       {items.length === 0 ? (
-        <p className="py-6 text-center text-sm text-muted">Rien ici pour le moment.</p>
+        <p className="text-muted py-6 text-center text-sm">Rien ici pour le moment.</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {items.map((it) => (
             <li
               key={it.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-2 px-3 py-2"
+              className="border-border bg-surface-2 flex items-center justify-between gap-3 rounded-xl border px-3 py-2"
             >
               <span className="min-w-0 flex-1 truncate text-sm">{it.name}</span>
               <button

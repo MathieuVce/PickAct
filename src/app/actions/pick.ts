@@ -43,8 +43,7 @@ export type SpinResult =
 export async function spinPick(filters: PickFilters): Promise<SpinResult> {
   const { group } = await requireCurrentMember();
 
-  const modes =
-    filters.allowedModes.length > 0 ? filters.allowedModes : ALL_MODES;
+  const modes = filters.allowedModes.length > 0 ? filters.allowedModes : ALL_MODES;
 
   // Total d'activités éligibles (statut actif ou remis à plus tard).
   const [{ count: totalEligible }] = await db

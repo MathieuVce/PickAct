@@ -1,12 +1,16 @@
-import { Footprints, Bike, Car, TrainFront, Sparkles, type LucideIcon } from "lucide-react";
+import {
+  Footprints,
+  Bike,
+  Car,
+  TrainFront,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import type { TravelMode } from "@/db/schema";
 
 export const TRAVEL_MODES: TravelMode[] = ["walk", "bike", "car", "transit"];
 
-export const TRAVEL_MODE_META: Record<
-  TravelMode,
-  { label: string; Icon: LucideIcon }
-> = {
+export const TRAVEL_MODE_META: Record<TravelMode, { label: string; Icon: LucideIcon }> = {
   walk: { label: "À pied", Icon: Footprints },
   bike: { label: "Vélo", Icon: Bike },
   car: { label: "Voiture", Icon: Car },

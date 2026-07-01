@@ -30,10 +30,10 @@ export default async function AccountPage() {
 
           <div className="card">
             <h2 className="text-lg font-semibold">Se reconnecter ailleurs</h2>
-            <p className="mt-1 text-sm text-muted">
-              Sur un autre appareil, choisis « Rejoindre ou se connecter » et
-              saisis le code du groupe, ton pseudo et ton mot de passe. Tu
-              retrouveras tes activités.
+            <p className="text-muted mt-1 text-sm">
+              Sur un autre appareil, choisis « Rejoindre ou se connecter » et saisis le
+              code du groupe, ton pseudo et ton mot de passe. Tu retrouveras tes
+              activités.
             </p>
             <div className="mt-4">
               <CopyableCode value={group.inviteCode} />
@@ -42,9 +42,9 @@ export default async function AccountPage() {
 
           <div className="card">
             <h2 className="text-lg font-semibold">Session</h2>
-            <p className="mb-4 mt-1 text-sm text-muted">
-              Te déconnecter ne supprime rien. Quitter le groupe efface
-              définitivement tes activités.
+            <p className="text-muted mt-1 mb-4 text-sm">
+              Te déconnecter ne supprime rien. Quitter le groupe efface définitivement tes
+              activités.
             </p>
             <div className="flex flex-wrap gap-3">
               <form action={logout}>

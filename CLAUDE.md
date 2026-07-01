@@ -96,6 +96,21 @@ Env requises : `DATABASE_URL` (Neon), `ADMIN_PASSWORD`, `ADMIN_SECRET`.
 ## Git / commits
 - **Ne jamais ajouter de ligne `Co-Authored-By` (ni mention « coauthored ») dans les messages de commit.**
 
+## Conventions de code (architecture)
+- **Utils d'abord** : toute logique pure ou partagée va dans `src/lib` (ex. `status.ts`,
+  `travel.ts`, `codes.ts`). Zéro duplication : une seule source de vérité par concept.
+- **Fichiers courts** : viser moins de 200 lignes (garde fou ESLint `max-lines`). Un fichier
+  qui grossit se découpe.
+- **Beaucoup de composants ciblés** : un composant = une responsabilité. Exemples de découpage :
+  `SpinModal` -> `Wheel` + `WinnerReveal` + `DecisionButtons` ; `PickPanel` -> `PickFilters` +
+  `PickScene`.
+- **Fonctions claires** : courtes, un seul rôle, nommées explicitement (ex. `targetRotation`).
+  Complexité et imbrication maîtrisées (ESLint `complexity`, `max-depth`).
+- **Responsive** : tester à 390 px, empiler les actions plutôt que les comprimer, `min-w-0`
+  sur les zones tronquables.
+- **Outils** : `npm run format` (Prettier), `npm run lint` (ESLint) et `npm run test` (Vitest)
+  doivent passer avant chaque commit. Tests unitaires colocalisés (`*.test.ts` près du code).
+
 ## Pièges
 - `db` est un Proxy paresseux : pas de connexion au build, seulement à la 1re requête (env manquante = throw runtime).
 - Server Actions de mutation : `redirect()` lève volontairement (ne pas l'envelopper dans try/catch).

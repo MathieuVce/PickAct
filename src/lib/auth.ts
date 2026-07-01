@@ -29,9 +29,10 @@ export async function clearSessionCookie(): Promise<void> {
  * Récupère le membre courant (et son groupe) à partir du cookie de session.
  * Renvoie null si non connecté ou session invalide.
  */
-export async function getCurrentMember(): Promise<
-  { member: Member; group: Group } | null
-> {
+export async function getCurrentMember(): Promise<{
+  member: Member;
+  group: Group;
+} | null> {
   const store = await cookies();
   const token = store.get(SESSION_COOKIE)?.value;
   if (!token) return null;

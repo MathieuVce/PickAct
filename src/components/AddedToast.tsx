@@ -15,8 +15,8 @@ export default function AddedToast() {
 
   if (!show) return null;
   return (
-    <div className="mb-4 flex items-center gap-2 rounded-xl border border-primary/40 bg-primary/10 px-4 py-3 text-sm">
-      <CheckCircle2 className="size-5 text-primary" />
+    <div className="border-primary/40 bg-primary/10 mb-4 flex items-center gap-2 rounded-xl border px-4 py-3 text-sm">
+      <CheckCircle2 className="text-primary size-5" />
       Activité ajoutée. Elle est maintenant en jeu pour le tirage.
     </div>
   );

@@ -1,32 +1,24 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
-import { Plus, Clock, Wallet, Link as LinkIcon, Trash2, ClipboardList, PartyPopper } from "lucide-react";
+import {
+  Plus,
+  Clock,
+  Wallet,
+  Link as LinkIcon,
+  Trash2,
+  ClipboardList,
+  PartyPopper,
+} from "lucide-react";
 import { db } from "@/db";
 import { activities } from "@/db/schema";
 import { getCurrentMember } from "@/lib/auth";
 import { deleteActivity } from "@/app/actions/activities";
 import AppNav from "@/components/AppNav";
 import AddedToast from "@/components/AddedToast";
-import {
-  formatDuration,
-  travelModeIcon,
-  travelModeLabel,
-} from "@/lib/travel";
-
-const STATUS_LABEL: Record<string, string> = {
-  active: "En jeu",
-  validated: "Validée",
-  skipped: "Passée",
-  later: "Plus tard",
-};
-
-const STATUS_COLOR: Record<string, string> = {
-  active: "var(--cyan)",
-  validated: "var(--green)",
-  skipped: "var(--accent)",
-  later: "var(--primary)",
-};
+import { formatDuration, travelModeLabel } from "@/lib/travel";
+import { STATUS_COLOR, STATUS_LABEL } from "@/lib/status";
+import TravelModeIcon from "@/components/TravelModeIcon";
 
 export default async function MyActivitiesPage({
   searchParams,
@@ -53,7 +45,7 @@ export default async function MyActivitiesPage({
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold">Mes activités</h1>
-            <p className="text-sm text-muted">
+            <p className="text-muted text-sm">
               Visibles de toi seul. Les autres ne voient pas qui a ajouté quoi.
             </p>
           </div>
@@ -63,7 +55,7 @@ export default async function MyActivitiesPage({
         </div>
 
         {myActivities.length === 0 ? (
-          <div className="card flex flex-col items-center gap-3 py-12 text-center text-muted">
+          <div className="card text-muted flex flex-col items-center gap-3 py-12 text-center">
             <ClipboardList className="size-12" />
             <p>Tu n&apos;as pas encore ajouté d&apos;activité.</p>
             <Link href="/my-activities/new" className="btn-primary">
@@ -74,7 +66,6 @@ export default async function MyActivitiesPage({
           <ul className="flex flex-col gap-3">
             {myActivities.map((a) => {
               const total = a.estMinutes + (a.travelMinutes ?? 0);
-              const TravelIcon = travelModeIcon(a.travelMode);
               return (
                 <li key={a.id} className="card flex items-start gap-4 p-4">
                   {a.imageUrl ? (
@@ -82,11 +73,11 @@ export default async function MyActivitiesPage({
                     <img
                       src={a.imageUrl}
                       alt={a.name}
-                      className="h-16 w-16 shrink-0 rounded-lg border border-border object-cover"
+                      className="border-border h-16 w-16 shrink-0 rounded-lg border object-cover"
                     />
                   ) : (
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-border bg-surface-2">
-                      <PartyPopper className="size-6 text-muted" />
+                    <div className="border-border bg-surface-2 flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border">
+                      <PartyPopper className="text-muted size-6" />
                     </div>
                   )}
 
@@ -104,12 +95,17 @@ export default async function MyActivitiesPage({
                       </span>
                     </div>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
-                      <span className="chip"><Clock className="size-3.5" /> {formatDuration(total)}</span>
+                      <span className="chip">
+                        <Clock className="size-3.5" /> {formatDuration(total)}
+                      </span>
                       {a.cost != null && (
-                        <span className="chip"><Wallet className="size-3.5" /> {Number(a.cost).toFixed(2)} €</span>
+                        <span className="chip">
+                          <Wallet className="size-3.5" /> {Number(a.cost).toFixed(2)} €
+                        </span>
                       )}
                       <span className="chip">
-                        <TravelIcon className="size-3.5" /> {travelModeLabel(a.travelMode)}
+                        <TravelModeIcon mode={a.travelMode} className="size-3.5" />{" "}
+                        {travelModeLabel(a.travelMode)}
                       </span>
                       {a.link && (
                         <a

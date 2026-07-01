@@ -2,11 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { Sparkles, LogIn } from "lucide-react";
-import {
-  createGroup,
-  enterGroup,
-  type ActionState,
-} from "@/app/actions/groups";
+import { createGroup, enterGroup, type ActionState } from "@/app/actions/groups";
 import PasswordField from "@/components/PasswordField";
 
 type Tab = "create" | "enter";
@@ -33,15 +29,13 @@ export default function HomeForms({ initialTab }: { initialTab?: Tab }) {
 
   return (
     <div className="card w-full max-w-md">
-      <div className="mb-6 flex rounded-xl border border-border bg-surface-2 p-1">
+      <div className="border-border bg-surface-2 mb-6 flex rounded-xl border p-1">
         {TABS.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
             className={`flex-1 rounded-lg px-2 py-2 text-xs font-semibold transition-colors sm:text-sm ${
-              tab === t.id
-                ? "bg-primary text-white"
-                : "text-muted hover:text-foreground"
+              tab === t.id ? "bg-primary text-white" : "text-muted hover:text-foreground"
             }`}
           >
             {t.label}
@@ -94,10 +88,9 @@ export default function HomeForms({ initialTab }: { initialTab?: Tab }) {
 
       {tab === "enter" && (
         <form action={enterAction} className="flex flex-col gap-4">
-          <p className="text-sm text-muted">
-            Entre le code du groupe avec ton pseudo et ton mot de passe. Premier
-            passage ou reconnexion sur un autre appareil, c&apos;est le même
-            formulaire.
+          <p className="text-muted text-sm">
+            Entre le code du groupe avec ton pseudo et ton mot de passe. Premier passage
+            ou reconnexion sur un autre appareil, c&apos;est le même formulaire.
           </p>
           <div>
             <label className="label" htmlFor="inviteCode">
@@ -106,7 +99,7 @@ export default function HomeForms({ initialTab }: { initialTab?: Tab }) {
             <input
               id="inviteCode"
               name="inviteCode"
-              className="field font-mono uppercase tracking-wider"
+              className="field font-mono tracking-wider uppercase"
               placeholder="PICK4F2A"
               required
             />

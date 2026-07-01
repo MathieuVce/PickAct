@@ -17,7 +17,7 @@ export default function CopyableCode({ value }: { value: string }) {
   }
 
   return (
-    <div className="flex items-center justify-between gap-2 rounded-xl border border-border bg-surface-2 px-3 py-2">
+    <div className="border-border bg-surface-2 flex items-center justify-between gap-2 rounded-xl border px-3 py-2">
       <code className="font-mono text-base tracking-wider">{value}</code>
       <button className="btn-ghost px-2 py-1" onClick={copy}>
         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}

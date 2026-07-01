@@ -4,10 +4,10 @@ import { logoutAdmin } from "@/app/actions/admin";
 
 export default function AdminNav() {
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
+    <header className="border-border bg-background/80 sticky top-0 z-10 border-b backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-4">
         <Link href="/admin" className="flex min-w-0 items-center gap-2">
-          <ShieldCheck className="size-5 shrink-0 text-primary" />
+          <ShieldCheck className="text-primary size-5 shrink-0" />
           <span className="shrink-0 text-lg font-extrabold">
             Pick<span className="gradient-text">Act</span>
           </span>

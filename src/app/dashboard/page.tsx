@@ -23,15 +23,18 @@ export default async function DashboardPage() {
     .where(eq(activities.groupId, group.id))
     .groupBy(activities.status);
 
-  const byStatus = (s: ActivityStatus) =>
-    counts.find((c) => c.status === s)?.count ?? 0;
+  const byStatus = (s: ActivityStatus) => counts.find((c) => c.status === s)?.count ?? 0;
   const total = counts.reduce((acc, c) => acc + c.count, 0);
   const eligible = byStatus("active") + byStatus("later");
 
   // Historique (noms + date de décision, anonyme).
   async function history(status: ActivityStatus): Promise<HistoryItem[]> {
     const rows = await db
-      .select({ id: activities.id, name: activities.name, decidedAt: activities.decidedAt })
+      .select({
+        id: activities.id,
+        name: activities.name,
+        decidedAt: activities.decidedAt,
+      })
       .from(activities)
       .where(and(eq(activities.groupId, group.id), eq(activities.status, status)))
       .orderBy(desc(activities.decidedAt));
@@ -62,7 +65,7 @@ export default async function DashboardPage() {
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold">{group.name}</h1>
-            <p className="text-sm text-muted">
+            <p className="text-muted text-sm">
               Lancez la roue selon vos contraintes du moment.
             </p>
           </div>
@@ -85,7 +88,7 @@ export default async function DashboardPage() {
               <span className="text-2xl font-bold" style={{ color: s.color }}>
                 {s.value}
               </span>
-              <span className="text-xs text-muted">{s.label}</span>
+              <span className="text-muted text-xs">{s.label}</span>
             </div>
           ))}
         </div>

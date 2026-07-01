@@ -13,13 +13,13 @@ export default function AppNav({ groupName }: { groupName: string }) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
+    <header className="border-border bg-background/80 sticky top-0 z-10 border-b backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-4">
         <Link href="/dashboard" className="flex min-w-0 items-center gap-2">
           <span className="shrink-0 text-lg font-extrabold">
             Pick<span className="gradient-text">Act</span>
           </span>
-          <span className="hidden truncate text-sm text-muted sm:inline">
+          <span className="text-muted hidden truncate text-sm sm:inline">
             · {groupName}
           </span>
         </Link>

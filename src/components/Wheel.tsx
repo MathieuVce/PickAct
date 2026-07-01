@@ -62,7 +62,7 @@ export default function Wheel({
       {/* Pointeur en haut */}
       <div
         aria-hidden
-        className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)]"
+        className="absolute top-0 left-1/2 z-20 -translate-x-1/2 -translate-y-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)]"
         style={{
           width: 0,
           height: 0,
@@ -77,9 +77,7 @@ export default function Wheel({
         className="relative z-10 h-full w-full motion-reduce:!transition-none"
         style={{
           transform: `rotate(${rotation}deg)`,
-          transition: spinning
-            ? "transform 3.6s cubic-bezier(0.16, 1, 0.3, 1)"
-            : "none",
+          transition: spinning ? "transform 3.6s cubic-bezier(0.16, 1, 0.3, 1)" : "none",
         }}
       >
         {segments.map((s, i) => {
@@ -103,11 +101,11 @@ export default function Wheel({
 
       {/* Compteur central fixe */}
       <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-        <div className="flex aspect-square w-[34%] flex-col items-center justify-center rounded-full border-4 border-white/20 bg-surface/90 text-center shadow-2xl backdrop-blur">
-          <span className="text-3xl font-extrabold leading-none gradient-text sm:text-4xl">
+        <div className="bg-surface/90 flex aspect-square w-[34%] flex-col items-center justify-center rounded-full border-4 border-white/20 text-center shadow-2xl backdrop-blur">
+          <span className="gradient-text text-3xl leading-none font-extrabold sm:text-4xl">
             {count}
           </span>
-          <span className="mt-1 text-[0.6rem] font-semibold uppercase tracking-wider text-muted sm:text-xs">
+          <span className="text-muted mt-1 text-[0.6rem] font-semibold tracking-wider uppercase sm:text-xs">
             {count > 1 ? "activités" : "activité"}
           </span>
         </div>

@@ -4,17 +4,9 @@ import { redirect } from "next/navigation";
 import { and, eq, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { groups, members } from "@/db/schema";
-import {
-  generateInviteCode,
-  generateSessionToken,
-  normalizeCode,
-} from "@/lib/codes";
+import { generateInviteCode, generateSessionToken, normalizeCode } from "@/lib/codes";
 import { hashPassword, verifyPassword, MIN_PASSWORD_LENGTH } from "@/lib/password";
-import {
-  setSessionCookie,
-  clearSessionCookie,
-  getCurrentMember,
-} from "@/lib/auth";
+import { setSessionCookie, clearSessionCookie, getCurrentMember } from "@/lib/auth";
 
 export type ActionState = { error?: string } | undefined;
 
@@ -34,7 +26,9 @@ export async function createGroup(
   if (!groupName) return { error: "Donne un nom au groupe." };
   if (!pseudo) return { error: "Choisis un pseudo." };
   if (password.length < MIN_PASSWORD_LENGTH) {
-    return { error: `Mot de passe trop court (${MIN_PASSWORD_LENGTH} caractères minimum).` };
+    return {
+      error: `Mot de passe trop court (${MIN_PASSWORD_LENGTH} caractères minimum).`,
+    };
   }
 
   let inviteCode = generateInviteCode();
@@ -80,7 +74,9 @@ export async function enterGroup(
   if (!code) return { error: "Entre le code du groupe." };
   if (!pseudo) return { error: "Choisis un pseudo." };
   if (password.length < MIN_PASSWORD_LENGTH) {
-    return { error: `Mot de passe trop court (${MIN_PASSWORD_LENGTH} caractères minimum).` };
+    return {
+      error: `Mot de passe trop court (${MIN_PASSWORD_LENGTH} caractères minimum).`,
+    };
   }
 
   const [group] = await db
@@ -110,10 +106,7 @@ export async function enterGroup(
     if (!verifyPassword(password, existing.passwordHash)) {
       return { error: "Mot de passe incorrect pour ce pseudo." };
     }
-    await db
-      .update(members)
-      .set({ sessionToken })
-      .where(eq(members.id, existing.id));
+    await db.update(members).set({ sessionToken }).where(eq(members.id, existing.id));
   } else {
     // Première venue : on crée le membre avec ce mot de passe.
     await db.insert(members).values({

@@ -16,9 +16,9 @@ export default function LeaveGroupButton() {
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-red-500/30 bg-red-500/5 p-4">
-      <p className="text-sm text-foreground">
-        Sûr·e ? Tes activités seront <strong>définitivement supprimées</strong> et
-        tu quitteras ce groupe.
+      <p className="text-foreground text-sm">
+        Sûr·e ? Tes activités seront <strong>définitivement supprimées</strong> et tu
+        quitteras ce groupe.
       </p>
       <div className="flex gap-2">
         <button className="btn-secondary" onClick={() => setConfirming(false)}>

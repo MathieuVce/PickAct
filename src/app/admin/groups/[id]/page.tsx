@@ -8,20 +8,7 @@ import { isAdmin } from "@/lib/admin";
 import { deleteMember, deleteAdminActivity, renameGroup } from "@/app/actions/admin";
 import AdminNav from "@/components/AdminNav";
 import { formatDuration, travelModeLabel } from "@/lib/travel";
-
-const STATUS_LABEL: Record<string, string> = {
-  active: "En jeu",
-  validated: "Validée",
-  skipped: "Passée",
-  later: "Plus tard",
-};
-
-const STATUS_COLOR: Record<string, string> = {
-  active: "var(--cyan)",
-  validated: "var(--green)",
-  skipped: "var(--accent)",
-  later: "var(--primary)",
-};
+import { STATUS_COLOR, STATUS_LABEL } from "@/lib/status";
 
 export default async function AdminGroupDetail({
   params,
@@ -69,10 +56,14 @@ export default async function AdminGroupDetail({
           <form action={renameGroup} className="flex flex-wrap items-end gap-3">
             <input type="hidden" name="id" value={group.id} />
             <div className="flex-1">
-              <label className="label" htmlFor="name">Nom du groupe</label>
+              <label className="label" htmlFor="name">
+                Nom du groupe
+              </label>
               <input id="name" name="name" defaultValue={group.name} className="field" />
             </div>
-            <button type="submit" className="btn-secondary">Renommer</button>
+            <button type="submit" className="btn-secondary">
+              Renommer
+            </button>
             <code className="chip font-mono">{group.inviteCode}</code>
           </form>
         </div>
@@ -83,12 +74,16 @@ export default async function AdminGroupDetail({
             {groupMembers.map((m) => (
               <li key={m.id} className="card flex items-center justify-between gap-3 p-3">
                 <span className="flex items-center gap-2 text-sm">
-                  <User className="size-4 text-muted" /> {m.displayName}
+                  <User className="text-muted size-4" /> {m.displayName}
                 </span>
                 <form action={deleteMember}>
                   <input type="hidden" name="id" value={m.id} />
                   <input type="hidden" name="groupId" value={group.id} />
-                  <button type="submit" className="btn-danger px-3 py-1.5" aria-label="Supprimer le membre">
+                  <button
+                    type="submit"
+                    className="btn-danger px-3 py-1.5"
+                    aria-label="Supprimer le membre"
+                  >
                     <Trash2 className="size-4" />
                   </button>
                 </form>
@@ -103,7 +98,10 @@ export default async function AdminGroupDetail({
             {acts.map((a) => {
               const total = a.estMinutes + (a.travelMinutes ?? 0);
               return (
-                <li key={a.id} className="card flex items-start justify-between gap-3 p-3">
+                <li
+                  key={a.id}
+                  className="card flex items-start justify-between gap-3 p-3"
+                >
                   <div className="min-w-0 flex-1">
                     <div className="flex min-w-0 items-center gap-2">
                       <h3 className="min-w-0 truncate font-medium">{a.name}</h3>
@@ -117,17 +115,25 @@ export default async function AdminGroupDetail({
                         {STATUS_LABEL[a.status]}
                       </span>
                     </div>
-                    <div className="mt-1 flex flex-wrap gap-1.5 text-xs text-muted">
-                      <span className="chip"><User className="size-3.5" /> {a.author}</span>
+                    <div className="text-muted mt-1 flex flex-wrap gap-1.5 text-xs">
+                      <span className="chip">
+                        <User className="size-3.5" /> {a.author}
+                      </span>
                       <span className="chip">{formatDuration(total)}</span>
-                      {a.cost != null && <span className="chip">{Number(a.cost).toFixed(2)} €</span>}
+                      {a.cost != null && (
+                        <span className="chip">{Number(a.cost).toFixed(2)} €</span>
+                      )}
                       <span className="chip">{travelModeLabel(a.travelMode)}</span>
                     </div>
                   </div>
                   <form action={deleteAdminActivity}>
                     <input type="hidden" name="id" value={a.id} />
                     <input type="hidden" name="groupId" value={group.id} />
-                    <button type="submit" className="btn-danger px-3 py-1.5" aria-label="Supprimer l'activité">
+                    <button
+                      type="submit"
+                      className="btn-danger px-3 py-1.5"
+                      aria-label="Supprimer l'activité"
+                    >
                       <Trash2 className="size-4" />
                     </button>
                   </form>
